@@ -1,0 +1,2 @@
+class Jeans < Clothes
+end

@@ -1,0 +1,92 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *= #require_tree .
+ *= #require_self
+ */
+
+@import "bootstrap"
+@import "font-awesome-sprockets"
+@import "font-awesome"
+
+#main-navbar
+  color: black
+  background: white
+  border: white
+  margin-bottom: 50px
+  a
+    font-family: Arial, Helvetica, sans-serif
+    font-size: 15px
+    font-weight: bold
+  a:hover
+    text-decoration: underline
+  a.brand
+    padding-top: 10px
+    font-size: 25px
+.navbar-inverse
+  background: black
+.navbar-no-border-radius
+  border-radius: 0
+#extra-nav
+  max-height: 40px
+  height: 40px
+  background: black
+  margin-right: .5px
+  a
+    margin-left: 25px
+    color: white
+    text-decoration: none
+  a:hover
+    text-decoration: solid
+.footer
+  background: black
+  padding-top: 25px
+  a
+    color: white
+.margin-index
+  margin-bottom: 50px
+.footer-below
+  padding: 20px 0
+  background-color: black
+  color: white
+  font-size: 10px
+.logo
+  padding-top: 0
+  margin-left: 15px
+
+a.img
+  .block-2
+    margin-left: 50px
+    position: absolute
+    opacity: .6
+    display: none
+    width: 250px
+    height: 250px
+    background: lightgrey
+    z-index: 100
+a.img:hover
+  .block-2
+    display: block
+#doc_time
+  padding-top: 10px
+  margin-right: 10px
+#shest
+  -moz-appearance: textfield
+
+#shest::-webkit-inner-spin-button
+  display: none
+.basket-table
+  background: black
+  color: white
+.current_user
+  color: black
+  font-size: 15px
+  font-weight: bold

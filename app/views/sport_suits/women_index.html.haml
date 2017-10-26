@@ -1,0 +1,34 @@
+.container.text-center
+  %h1 Женские спортивные костюмы
+  - for sport_suit in @sport_suits
+    - if sport_suit.quantity > 0
+      .row.margin-index
+        .col-md-4.text-center
+          - if sport_suit.image_stored?
+            = image_tag (sport_suit.image.thumb('150x150#').url)
+          - else
+            = image_tag(asset_path('no_image.jpg'), size:'150x150')
+        .col-md-4.text-center
+          %ul.list-group
+            %li.list-group-item{style: 'border-color: white'}
+              %b Фирма:
+              #{sport_suit.brand}
+            %li.list-group-item{style: 'border-color: white'}
+              %b Цвет:
+              #{sport_suit.color}
+            %li.list-group-item{style: 'border-color: white'}
+              %b Доступные размеры:
+              #{sport_suit.size}
+            %li.list-group-item{style: 'border-color: white'}
+              = link_to 'Подробное описание', sport_suit_path(sport_suit)
+        .col-md-2.col-md-offset-1.text-center
+          .form-group
+            %b Цена:
+            #{sport_suit.cost}
+            - if user_signed_in?
+              - if current_user.role == 'admin'
+                .form-group
+                  = link_to 'Редактировать', edit_sport_suit_path(sport_suit)
+                  = link_to 'Удалить', sport_suit, method: :delete
+          = link_to 'В корзину', add_to_basket_path(item_id: sport_suit.id, basket: true),
+                                                    class: 'btn btn-warning'

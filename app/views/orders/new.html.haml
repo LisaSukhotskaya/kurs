@@ -1,0 +1,19 @@
+.container.text-center
+  .col-md-4.col-md-offset-4
+    %h1 Оформление заказа
+    = form_for @order do |o|
+      .form-group
+        = o.label 'Имя'
+        = o.text_field :client_first_name, class: 'form-control'
+      .form-group
+        = o.label 'Фамилия'
+        = o.text_field :client_last_name, class: 'form-control'
+      .form-group
+        = o.label 'Номер телефона'
+        = o.text_field :client_phone, class: 'form-control'
+      .form-group
+        = o.label 'Адрес доставки'
+        = o.text_field :client_address, class: 'form-control'
+      .form-group
+        = o.submit 'Оформить заказ', class: 'btn btn-success'
+

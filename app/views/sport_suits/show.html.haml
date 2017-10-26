@@ -1,0 +1,28 @@
+.container
+  .row
+    .col-md-4.col-md-offset-4.text-center
+      %h1
+        = @sport_suit.brand
+      %ul.list-group
+        %li.list-group-item
+          %b Цвет:
+          #{@sport_suit.color}
+        %li.list-group-item
+          %b Рисунок:
+          #{@sport_suit.print}
+        %li.list-group-item
+          %b Материал:
+          #{@sport_suit.cloth}
+        %li.list-group-item
+          %b Доступные размеры:
+          #{@sport_suit.size}
+        %li.list-group-item
+          %b Цена за штуку:
+          #{@sport_suit.cost}
+        %li.list-group-item
+          %b Описание:
+          #{@sport_suit.description}
+      = link_to 'В корзину', add_to_basket_path(basket_item_size: :basket_item_size,
+                                                  item_id: @sport_suit.id, basket: true),
+                                                  class: 'btn btn-warning'
+      = link_to 'Назад', :back, class: 'btn btn-primary', style: 'border-color: gray; background-color: grey'

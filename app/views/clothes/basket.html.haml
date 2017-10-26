@@ -1,0 +1,45 @@
+.container
+  .row
+    .col-md-12.text-center
+      - @total_cost = 0
+      %h1 Корзина покупателя
+      %table.table
+        %thead.thead-inverse.basket-table
+          %tr
+            %th.text-center
+              Картинка
+            %th.text-center
+              Товар
+            %th.text-center
+              Размер
+            %th.text-center
+              Количество
+            %th.text-center
+              Цена за штуку
+            %th.text-center
+        - for item in @items do
+          %tbody
+            %th.text-center
+              - if item.image_stored?
+                = image_tag (item.image.thumb('75x75#').url)
+              - else
+                = image_tag(asset_path('no_image.jpg'), size:'150x150')
+            %th.text-center
+              Фирма: #{item.brand}
+              %br/
+              Цвет: #{item.color}
+            %th.text-center
+              = item.basket_item_size
+            %th.text-center
+              = item.basket_count
+            %th.text-center
+              = item.cost
+            %th.text-center
+              = link_to 'Удалить из корзины', delete_from_basket_path(item_id: item.id)
+            - @total_cost += item.cost * item.basket_count
+  %hr{style: 'border-color: black'}
+    %b Общая сумма заказа:
+    = @total_cost
+  .pull-right
+    - if @total_cost > 0
+      = link_to 'Оформить заказ', new_order_path, class: 'btn btn-success'

@@ -1,0 +1,34 @@
+.container.text-center
+  %h1 Новые поступления
+  - for clothes in @clothes
+    .row.margin-index
+      .col-md-4.text-center
+        - if clothes.image_stored?
+          = image_tag (clothes.image.thumb('150x150#').url)
+        - else
+          = image_tag(asset_path('no_image.jpg'), size:'150x150')
+      .col-md-4.text-center
+        %ul.list-group
+          %li.list-group-item{style: 'border-color: white'}
+            %b Фирма:
+            #{clothes.brand}
+          %li.list-group-item{style: 'border-color: white'}
+            %b Тип:
+            #{clothes.gender}
+          %li.list-group-item{style: 'border-color: white'}
+            %b Цвет:
+            #{clothes.color}
+          %li.list-group-item{style: 'border-color: white'}
+            %b Доступные размеры:
+            #{clothes.size}
+      .col-md-2.col-md-offset-1.text-center
+        %b Цена:
+        #{clothes.cost}
+        %br/
+        = text_field_tag :basket_item_size,'', placeholder: 'Введите размер', class: 'form-control item_size'
+        %br/
+        %li.list-group-item{style: 'border-color: white'}
+          = link_to 'Описание товара', clothe_path(clothes)
+        %br
+        = link_to 'В корзину', add_to_basket_path(item_id: clothes.id, basket: true ),
+                                                  class: 'btn btn-warning basket_link'

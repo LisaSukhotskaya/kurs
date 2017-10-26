@@ -1,0 +1,34 @@
+.container.text-center
+  %h1 Мужские кофты
+  - for jumper in @jumpers
+    - if jumper.quantity > 0
+      .row.margin-index
+        .col-md-4.text-center
+          - if jumper.image_stored?
+            = image_tag (jumper.image.thumb('150x150#').url)
+          - else
+            = image_tag(asset_path('no_image.jpg'), size:'150x150')
+        .col-md-4.text-center
+          %ul.list-group
+            %li.list-group-item{style: 'border-color: white'}
+              %b Фирма:
+              #{jumper.brand}
+            %li.list-group-item{style: 'border-color: white'}
+              %b Цвет:
+              #{jumper.color}
+            %li.list-group-item{style: 'border-color: white'}
+              %b Доступные размеры:
+              #{jumper.size}
+            %li.list-group-item{style: 'border-color: white'}
+              = link_to 'Подробное описание', jumper_path(jumper)
+        .col-md-2.col-md-offset-1.text-center
+          .form-group
+            %b Цена:
+            #{jumper.cost}
+            - if user_signed_in?
+              - if current_user.role == 'admin'
+                .form-group
+                  = link_to 'Редактировать', edit_jumper_path(jumper)
+                  = link_to 'Удалить', jumper, method: :delete
+          = link_to 'В корзину', add_to_basket_path(item_id: jumper.id, basket: true),
+                                                    class: 'btn btn-warning'

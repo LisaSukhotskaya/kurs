@@ -1,0 +1,2 @@
+class Blouse < Clothes
+end

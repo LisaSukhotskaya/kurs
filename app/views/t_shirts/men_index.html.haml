@@ -1,0 +1,34 @@
+.container.text-center
+  %h1 Мужские майки
+  - for t_shirt in @t_shirts
+    - if t_shirt.quantity > 0
+      .row.margin-index
+        .col-md-4.text-center
+          - if t_shirt.image_stored?
+            = image_tag (t_shirt.image.thumb('150x150#').url)
+          - else
+            = image_tag(asset_path('no_image.jpg'), size:'150x150')
+        .col-md-4.text-center
+          %ul.list-group
+            %li.list-group-item{style: 'border-color: white'}
+              %b Фирма:
+              #{t_shirt.brand}
+            %li.list-group-item{style: 'border-color: white'}
+              %b Цвет:
+              #{t_shirt.color}
+            %li.list-group-item{style: 'border-color: white'}
+              %b Доступные размеры:
+              #{t_shirt.size}
+            %li.list-group-item{style: 'border-color: white'}
+              = link_to 'Подробное описание', t_shirt_path(t_shirt)
+        .col-md-2.col-md-offset-1.text-center
+          .form-group
+            %b Цена:
+            #{t_shirt.cost}
+            - if user_signed_in?
+              - if current_user.role == 'admin'
+                .form-group
+                  = link_to 'Редактировать', edit_t_shirt_path(t_shirt)
+                  = link_to 'Удалить', t_shirt, method: :delete
+          = link_to 'В корзину', add_to_basket_path(item_id: t_shirt.id, basket: true),
+                                                    class: 'btn btn-warning'

@@ -1,0 +1,28 @@
+.container
+  .row
+    .col-md-4.col-md-offset-4.text-center
+      %h1
+        = @blouse.brand
+      %ul.list-group
+        %li.list-group-item
+          %b Цвет:
+          #{@blouse.color}
+        %li.list-group-item
+          %b Рисунок:
+          #{@blouse.print}
+        %li.list-group-item
+          %b Материал:
+          #{@blouse.cloth}
+        %li.list-group-item
+          %b Доступные размеры:
+          #{@blouse.size}
+        %li.list-group-item
+          %b Цена за штуку:
+          #{@blouse.cost}
+        %li.list-group-item
+          %b Описание:
+          #{@blouse.description}
+      = link_to 'В корзину', add_to_basket_path(basket_item_size: :basket_item_size,
+                                                  item_id: @blouse.id, basket: true),
+                                                  class: 'btn btn-warning'
+      = link_to 'Назад', :back, class: 'btn btn-primary', style: 'border-color: gray; background-color: grey'

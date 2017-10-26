@@ -1,0 +1,32 @@
+.container.text-center
+  %h1 Женские шапки
+  - for headdress in @headdresses
+    - if headdress.quantity > 0
+      .row.margin-index
+        .col-md-4.text-center
+          - if headdress.image_stored?
+            = image_tag (headdress.image.thumb('150x150#').url)
+          - else
+            = image_tag(asset_path('no_image.jpg'), size:'150x150')
+        .col-md-4.text-center
+          %ul.list-group
+            %li.list-group-item{style: 'border-color: white'}
+              %b Фирма:
+              #{headdress.brand}
+            %li.list-group-item{style: 'border-color: white'}
+              %b Цвет:
+              #{headdress.color}
+            %li.list-group-item{style: 'border-color: white'}
+              %b Доступные размеры:
+              #{headdress.size}
+            %li.list-group-item{style: 'border-color: white'}
+              = link_to 'Подробное описание', headdress_path(headdress)
+        .col-md-2.col-md-offset-1.text-center
+          .form-group
+            %b Цена:
+            #{jacket.cost}
+          .form-group
+            = link_to 'Редактировать', edit_headdress_path(headdress)
+            = link_to 'Удалить', headdress, method: :delete
+          = link_to 'В корзину', add_to_basket_path(item_id: headdress.id, basket: true),
+                                                    class: 'btn btn-warning'

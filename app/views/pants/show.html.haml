@@ -1,0 +1,28 @@
+.container
+  .row
+    .col-md-4.col-md-offset-4.text-center
+      %h1
+        = @pants.brand
+      %ul.list-group
+        %li.list-group-item
+          %b Цвет:
+          #{@pants.color}
+        %li.list-group-item
+          %b Рисунок:
+          #{@pants.print}
+        %li.list-group-item
+          %b Материал:
+          #{@pants.cloth}
+        %li.list-group-item
+          %b Доступные размеры:
+          #{@pants.size}
+        %li.list-group-item
+          %b Цена за штуку:
+          #{@pants.cost}
+        %li.list-group-item
+          %b Описание:
+          #{@pants.description}
+      = link_to 'В корзину', add_to_basket_path(basket_item_size: :basket_item_size,
+                                                  item_id: @pants.id, basket: true),
+                                                  class: 'btn btn-warning'
+      = link_to 'Назад', :back, class: 'btn btn-primary', style: 'border-color: gray; background-color: grey'

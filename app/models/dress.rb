@@ -1,0 +1,2 @@
+class Dress < Clothes
+end

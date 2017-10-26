@@ -1,0 +1,34 @@
+.container.text-center
+  %h1 Мужские штаны
+  - for pants in @pants
+    - if pants.quantity > 0
+      .row.margin-index
+        .col-md-4.text-center
+          - if pants.image_stored?
+            = image_tag (pants.image.thumb('150x150#').url)
+          - else
+            = image_tag(asset_path('no_image.jpg'), size:'150x150')
+        .col-md-4.text-center
+          %ul.list-group
+            %li.list-group-item{style: 'border-color: white'}
+              %b Фирма:
+              #{pants.brand}
+            %li.list-group-item{style: 'border-color: white'}
+              %b Цвет:
+              #{pants.color}
+            %li.list-group-item{style: 'border-color: white'}
+              %b Доступные размеры:
+              #{pants.size}
+            %li.list-group-item{style: 'border-color: white'}
+              = link_to 'Подробное описание', pant_path(pants)
+        .col-md-2.col-md-offset-1.text-center
+          .form-group
+            %b Цена:
+            #{pants.cost}
+            - if user_signed_in?
+              - if current_user.role == 'admin'
+                .form-group
+                  = link_to 'Редактировать', edit_pant_path(pants)
+                  = link_to 'Удалить', pants, method: :delete
+          = link_to 'В корзину', add_to_basket_path(item_id: pants.id, basket: true),
+                                                    class: 'btn btn-warning'

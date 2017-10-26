@@ -1,0 +1,28 @@
+.container
+  .row
+    .col-md-4.col-md-offset-4.text-center
+      %h1
+        = @skirt.brand
+      %ul.list-group
+        %li.list-group-item
+          %b Цвет:
+          #{@skirt.color}
+        %li.list-group-item
+          %b Рисунок:
+          #{@skirt.print}
+        %li.list-group-item
+          %b Материал:
+          #{@skirt.cloth}
+        %li.list-group-item
+          %b Доступные размеры:
+          #{@skirt.size}
+        %li.list-group-item
+          %b Цена за штуку:
+          #{@skirt.cost}
+        %li.list-group-item
+          %b Описание:
+          #{@skirt.description}
+      = link_to 'В корзину', add_to_basket_path(basket_item_size: :basket_item_size,
+                                                  item_id: @skirt.id, basket: true),
+                                                  class: 'btn btn-warning'
+      = link_to 'Назад', :back, class: 'btn btn-primary', style: 'border-color: gray; background-color: grey'

@@ -1,0 +1,34 @@
+.container.text-center
+  %h1 Мужские джинсы
+  - for jeans in @jeans
+    - if jeans.quantity > 0
+      .row.margin-index
+        .col-md-4.text-center
+          - if jeans.image_stored?
+            = image_tag (jeans.image.thumb('150x150#').url)
+          - else
+            = image_tag(asset_path('no_image.jpg'), size:'150x150')
+        .col-md-4.text-center
+          %ul.list-group
+            %li.list-group-item{style: 'border-color: white'}
+              %b Фирма:
+              #{jeans.brand}
+            %li.list-group-item{style: 'border-color: white'}
+              %b Цвет:
+              #{jeans.color}
+            %li.list-group-item{style: 'border-color: white'}
+              %b Доступные размеры:
+              #{jeans.size}
+            %li.list-group-item{style: 'border-color: white'}
+              = link_to 'Подробное описание', jeans_path(jeans)
+        .col-md-2.col-md-offset-1.text-center
+          .form-group
+            %b Цена:
+            #{jeans.cost}
+            - if user_signed_in?
+              - if current_user.role == 'admin'
+                .form-group
+                  = link_to 'Редактировать', edit_jeans_path(jeans)
+                  = link_to 'Удалить', jeans, method: :delete
+          = link_to 'В корзину', add_to_basket_path(item_id: jeans.id, basket: true),
+                                                    class: 'btn btn-warning'

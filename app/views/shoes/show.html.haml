@@ -1,0 +1,28 @@
+.container
+  .row
+    .col-md-4.col-md-offset-4.text-center
+      %h1
+        = @shoes.brand
+      %ul.list-group
+        %li.list-group-item
+          %b Цвет:
+          #{@shoes.color}
+        %li.list-group-item
+          %b Рисунок:
+          #{@shoes.print}
+        %li.list-group-item
+          %b Материал:
+          #{@shoes.cloth}
+        %li.list-group-item
+          %b Доступные размеры:
+          #{@shoes.size}
+        %li.list-group-item
+          %b Цена за штуку:
+          #{@shoes.cost}
+        %li.list-group-item
+          %b Описание:
+          #{@shoes.description}
+      = link_to 'В корзину', add_to_basket_path(basket_item_size: :basket_item_size,
+                                                  item_id: @shoes.id, basket: true),
+                                                  class: 'btn btn-warning'
+      = link_to 'Назад', :back, class: 'btn btn-primary', style: 'border-color: gray; background-color: grey'

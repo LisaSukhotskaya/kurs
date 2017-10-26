@@ -1,0 +1,2 @@
+class Pant < Clothes
+end

@@ -1,0 +1,2 @@
+class TShirt < Clothes
+end

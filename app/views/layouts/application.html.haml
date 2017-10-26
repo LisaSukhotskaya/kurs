@@ -1,0 +1,43 @@
+!!!
+%html
+  %head
+    %meta{:content => 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}/
+    %title Loriblu
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = favicon_link_tag 'images.png'
+  %body
+    .row#extra-nav
+      %img.img-fluid.logo{src: asset_path('images.png'), style: 'width: 45px; height: 40px', alt: 'HELLO!'}/
+      - if user_signed_in? && current_user.role == 'admin'
+        %a{href: add_clothes_path} Добавлние одежды в магазин
+      %a{href: about_path} О магазине
+      #doc_time.pull-right{style: 'color: white'}
+        :javascript
+          clock();
+    %nav.navbar.navbar-inverse.navbar-no-border-radius#main-navbar
+      %a.brand.navbar-brand{href: root_path, style: 'color: black'} Loriblu
+      %ul.nav.navbar-nav
+        %li
+          %a{href: new_clothes_path, style: 'color: black'} Новые поступления
+        %li
+          %a{href: men_category_path, style: 'color: black'} Мужская одежда
+        %li
+          %a{href: women_category_path, style: 'color: black'} Женская одежда
+      %ul.nav.navbar-nav.pull-right
+        - if user_signed_in?
+          %li
+            = link_to "Ползователь: #{current_user.first_name} #{current_user.last_name}",
+                                        edit_user_registration_path, style: 'color: black'
+          %li
+            = link_to 'Выход', destroy_user_session_path, method: :delete, style: 'color: black'
+        -else
+          %li
+            = link_to 'Войти', new_user_session_path, style: 'color: black'
+          %li
+            = link_to 'Регистрация', new_user_registration_path, style: 'color: black'
+        %li
+          %a.nav.navbar-nav{href: basket_path, style: 'color: black'}Корзина #{icon('shopping-cart', class: 'fa-1.5x')}
+
+    = yield

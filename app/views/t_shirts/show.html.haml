@@ -1,0 +1,28 @@
+.container
+  .row
+    .col-md-4.col-md-offset-4.text-center
+      %h1
+        = @t_shirt.brand
+      %ul.list-group
+        %li.list-group-item
+          %b Цвет:
+          #{@t_shirt.color}
+        %li.list-group-item
+          %b Рисунок:
+          #{@t_shirt.print}
+        %li.list-group-item
+          %b Материал:
+          #{@t_shirt.cloth}
+        %li.list-group-item
+          %b Доступные размеры:
+          #{@t_shirt.size}
+        %li.list-group-item
+          %b Цена за штуку:
+          #{@t_shirt.cost}
+        %li.list-group-item
+          %b Описание:
+          #{@t_shirt.description}
+      = link_to 'В корзину', add_to_basket_path(basket_item_size: :basket_item_size,
+                                                  item_id: @t_shirt.id, basket: true),
+                                                  class: 'btn btn-warning'
+      = link_to 'Назад', :back, class: 'btn btn-primary', style: 'border-color: gray; background-color: grey'

@@ -1,0 +1,34 @@
+.container.text-center
+  %h1 Женские юбки
+  - for skirt in @skirts
+    .row.margin-index
+      - if skirt.quantity > 0
+        .col-md-4.text-center
+          - if skirt.image_stored?
+            = image_tag (skirt.image.thumb('150x150#').url)
+          - else
+            = image_tag(asset_path('no_image.jpg'), size:'150x150')
+        .col-md-4.text-center
+          %ul.list-group
+            %li.list-group-item{style: 'border-color: white'}
+              %b Фирма:
+              #{skirt.brand}
+            %li.list-group-item{style: 'border-color: white'}
+              %b Цвет:
+              #{skirt.color}
+            %li.list-group-item{style: 'border-color: white'}
+              %b Доступные размеры:
+              #{skirt.size}
+            %li.list-group-item{style: 'border-color: white'}
+              = link_to 'Подробное описание', skirt_path(skirt)
+        .col-md-2.col-md-offset-1.text-center
+          .form-group
+            %b Цена:
+            #{skirt.cost}
+            - if user_signed_in?
+              - if current_user.role == 'admin'
+                .form-group
+                  = link_to 'Редактировать', edit_skirt_path(skirt)
+                  = link_to 'Удалить', skirt, method: :delete
+          = link_to 'В корзину', add_to_basket_path(item_id: skirt.id, basket: true),
+                                                    class: 'btn btn-warning'

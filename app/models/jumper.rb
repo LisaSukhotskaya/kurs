@@ -1,0 +1,2 @@
+class Jumper < Clothes
+end
